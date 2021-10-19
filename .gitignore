@@ -1,1 +1,5 @@
 *.txt
+!requirements.txt
+press/*.txt
+release/*.txt
+dataset.csv
