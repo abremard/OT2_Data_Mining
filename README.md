@@ -7,6 +7,7 @@ Data-Processing:
 2) ✅ Map press events to release events (use stack)
 3) ✅ Format to : Keyname | Time-pressed | Time released | User (use pandas dataframe)
 4) Aggregate the format : Average hold time, press-press time, release-press time, APM (actions per minute)
+5) Add backspace counter compared to all key counter
 
 Algo:
 1) EDA
