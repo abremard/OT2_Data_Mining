@@ -1,6 +1,7 @@
 import glob
 import pandas as pd
 import sys
+import math
 
 from datetime import datetime
 
@@ -62,6 +63,44 @@ if __name__ == "__main__":
                 "user": sys.argv[1]
             })
 
-    dataset = pd.DataFrame(dataset_rows)
+    dataset = pd.DataFrame(dataset_rows).sort_values(['pressed'])
     print(dataset)
-    dataset.sort_values(['pressed']).to_csv("dataset.csv", index=False, date_format='%Y-%m-%d %H:%M:%S %f')
+    # dataset.to_csv("dataset.csv", index=False, date_format='%Y-%m-%d %H:%M:%S %f')
+
+    dataset["hold_time"] = (dataset["released"] - dataset["pressed"]) / pd.Timedelta(microseconds=1)
+    press_press_time = []
+    press_release_time = []
+    release_release_time = []
+
+    for index, row in dataset.iterrows():
+        press_press_delta = (dataset.iloc[index+1]["pressed"] - dataset.iloc[index]["pressed"]) / pd.Timedelta(microseconds=1)
+        press_press_time.append(press_press_delta)
+        release_release_delta = (dataset.iloc[index+1]["released"] - dataset.iloc[index]["released"]) / pd.Timedelta(microseconds=1)
+        release_release_time.append(release_release_delta)        
+        press_release_delta = (dataset.iloc[index+1]["pressed"] - dataset.iloc[index]["released"]) / pd.Timedelta(microseconds=1)
+        press_release_time.append(press_release_delta)
+
+        if index == len(dataset) - 2:
+            press_press_time.append(0)
+            press_release_time.append(0)
+            release_release_time.append(0)
+            break
+
+    dataset["press_press_time"] = press_press_time
+    dataset["press_release_time"] = press_release_time
+    dataset["release_release_time"] = release_release_time
+
+    print(dataset)
+
+    # output statistics
+    average_hold_time = dataset["hold_time"].mean()
+    average_press_press_time = dataset.iloc[:len(dataset)-1]["press_press_time"].mean()
+    average_press_release_time = dataset.iloc[:len(dataset)-1]["press_release_time"].mean()
+    average_release_release_time = dataset.iloc[:len(dataset)-1]["release_release_time"].mean()
+    apm = len(dataset) * 60 * math.pow(10, 6) / ((dataset.iloc[len(dataset)-1]["pressed"] - dataset.iloc[0]["pressed"]) / pd.Timedelta(microseconds=1))
+
+    print("average_hold_time", average_hold_time)
+    print("average_press_press_time", average_press_press_time)
+    print("average_press_release_time", average_press_release_time)
+    print("average_release_release_time", average_release_release_time)
+    print("apm", apm)
