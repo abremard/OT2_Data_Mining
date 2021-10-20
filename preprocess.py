@@ -117,14 +117,3 @@ if __name__ == "__main__":
     print("apm", apm)
 
     dataset.to_csv("dataset.csv", index=False)
-
-    # # KNN
-    # X = dataset[dataset.columns.difference(['user', 'pressed', 'released'])]
-    # y = dataset["user"]
-    # X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
-    # ## Instantiate the model with 5 neighbors. 
-    # knn = KNeighborsClassifier(n_neighbors=5)
-    # ## Fit the model on the training data.
-    # knn.fit(X_train, y_train)
-    # ## See how the model performs on the test data.
-    # knn.score(X_test, y_test)
