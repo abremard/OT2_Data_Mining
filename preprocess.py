@@ -7,8 +7,7 @@ from datetime import datetime
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
-if __name__ == "__main__":
-
+def preprocess(user = None):
     press_files = glob.glob("press/*.txt")
     press_rows = []
 
@@ -72,7 +71,7 @@ if __name__ == "__main__":
                 "key": sub_row["key"],
                 "pressed": press_time,
                 "released": sub_row["timestamp"],
-                "user": sys.argv[1]
+                "user": user
             })
 
     dataset = pd.DataFrame(dataset_rows).sort_values(['pressed'])
@@ -117,3 +116,8 @@ if __name__ == "__main__":
     print("apm", apm)
 
     dataset.to_csv("dataset.csv", index=False)
+    
+    return dataset
+
+if __name__ == "__main__":
+    dataframe = preprocess(sys.argv[1])
