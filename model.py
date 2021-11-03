@@ -1,6 +1,7 @@
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import GradientBoostingClassifier
 from datetime import datetime
 
 import pandas as pd
@@ -38,6 +39,8 @@ for file in files:
     print("")
     print("=================================================")
 
+
+print("------------------------- KNN -------------------------")
 # KNN
 X = dataframe[dataframe.columns.difference(
     ['user', 'pressed', 'released', 'key'])]
@@ -61,3 +64,10 @@ knn.fit(X_train, y_train)
 # print(knn.predict(X_test)[0:5])
 # See how the model performs on the test data.
 print(knn.score(X_test, y_test))
+print("------------------------- KNN -------------------------")
+print("\n")
+print("------------------------- GRADIENT BOOSTER -------------------------")
+clf = GradientBoostingClassifier(
+    n_estimators=100, learning_rate=1.0, max_depth=1, random_state=0).fit(X_train, y_train)
+print(clf.score(X_test, y_test))
+print("------------------------- GRADIENT BOOSTER -------------------------")
