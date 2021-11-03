@@ -34,7 +34,7 @@ certainty = max(np.bincount(knn_result)) * 100 / sum(np.bincount(knn_result))
 print(certainty)
 # Visualize
 fig = plt.figure()
-ax = fig.add_axes([0,0,1,1])
+ax = fig.add_axes([0, 0, 1, 1])
 user = ['Alex', 'Stefan', 'Zihao', 'Zineb']
 ax.bar(user, list(np.bincount(knn_result)))
 plt.show()
