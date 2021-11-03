@@ -19,7 +19,6 @@ def preprocess(user = None):
             line = fp.readline()
             while line:
                 if line == "\n":
-                    print("empty line!")
                     line = fp.readline()
                     continue
                 timestamp = datetime.strptime(line.strip().split(" - ")[0], '%Y-%m-%d %H:%M:%S %f')
@@ -35,7 +34,6 @@ def preprocess(user = None):
             line = fp.readline()
             while line:
                 if line == "\n":
-                    print("empty line release!")
                     line = fp.readline()
                     continue                
                 timestamp = datetime.strptime(line.strip().split(" - ")[0], '%Y-%m-%d %H:%M:%S %f')
@@ -52,8 +50,8 @@ def preprocess(user = None):
     press_df.to_csv("press_df.csv", date_format="%Y-%m-%d %H:%M:%S %f")
     release_df.to_csv("release_df.csv", date_format="%Y-%m-%d %H:%M:%S %f")
 
-    print(press_df)
-    print(release_df)
+    # print(press_df)
+    # print(release_df)
 
     # Map release -> press and build dataset
     dataset_rows = []
@@ -100,7 +98,7 @@ def preprocess(user = None):
     dataset["press_release_time"] = press_release_time
     dataset["release_release_time"] = release_release_time
 
-    print(dataset)
+    # print(dataset)
 
     # Analyse statistique
     average_hold_time = dataset["hold_time"].mean()
@@ -109,11 +107,11 @@ def preprocess(user = None):
     average_release_release_time = dataset.iloc[:len(dataset)-1]["release_release_time"].mean()
     apm = len(dataset) * 60 * math.pow(10, 6) / ((dataset.iloc[len(dataset)-1]["pressed"] - dataset.iloc[0]["pressed"]) / pd.Timedelta(microseconds=1))
 
-    print("average_hold_time", average_hold_time)
-    print("average_press_press_time", average_press_press_time)
-    print("average_press_release_time", average_press_release_time)
-    print("average_release_release_time", average_release_release_time)
-    print("apm", apm)
+    # print("average_hold_time", average_hold_time)
+    # print("average_press_press_time", average_press_press_time)
+    # print("average_press_release_time", average_press_release_time)
+    # print("average_release_release_time", average_release_release_time)
+    # print("apm", apm)
 
     dataset.to_csv("dataset.csv", index=False)
     
