@@ -22,6 +22,7 @@ Other todo:
 
 - optimize more the KNN, by using grid search to find the optimal param https://towardsdatascience.com/building-a-k-nearest-neighbors-k-nn-model-with-scikit-learn-51209555453a
 - one hot encode every key
+- choisir le threshold pour les stats
 
 ## Key logging
 
