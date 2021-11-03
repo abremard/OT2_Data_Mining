@@ -7,6 +7,7 @@ from datetime import datetime
 import pandas as pd
 import glob
 import math
+import pickle
 
 files = glob.glob("dataset/*.csv")
 rows = []
@@ -63,11 +64,17 @@ knn = KNeighborsClassifier(n_neighbors=4)
 knn.fit(X_train, y_train)
 # print(knn.predict(X_test)[0:5])
 # See how the model performs on the test data.
+
+knnPickle = open('models/knnpickle_file', 'wb')
+pickle.dump(knn, knnPickle)
+
 print(knn.score(X_test, y_test))
 print("------------------------- KNN -------------------------")
 print("\n")
 print("------------------------- GRADIENT BOOSTER -------------------------")
-clf = GradientBoostingClassifier(
+gb = GradientBoostingClassifier(
     n_estimators=100, learning_rate=1.0, max_depth=1, random_state=0).fit(X_train, y_train)
-print(clf.score(X_test, y_test))
+print(gb.score(X_test, y_test))
+gbPickle = open('models/gbpickle_file', 'wb')
+pickle.dump(gb, gbPickle)
 print("------------------------- GRADIENT BOOSTER -------------------------")

@@ -3,3 +3,5 @@
 press/*.txt
 release/*.txt
 dataset.csv
+models/**
+dataframe.csv
