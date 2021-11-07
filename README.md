@@ -24,6 +24,12 @@ Other todo:
 - one hot encode every key
 - choisir le threshold pour les stats
 
+Visualizations:
+
+- cluster des knn pour les projections
+- barchart et polar chart pour les counts des prédictions -> KNN et gradient booster
+- visualization des stats (box plot, repartition) -> raw data
+
 ## Key logging
 
 Run both scripts in 2 different terminals
