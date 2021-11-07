@@ -3,6 +3,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import GradientBoostingClassifier
 from datetime import datetime
+from sklearn.preprocessing import MinMaxScaler
 
 import pandas as pd
 import glob
@@ -70,6 +71,12 @@ if __name__ == "__main__":
     #y = dataframe["user"].values
     # print(y[0:5])
     X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
+    scaler = MinMaxScaler()
+    scaler.fit(X_train)
+    X_train = scaler.transform(X_train)
+    X_test = scaler.transform(X_test)
+    scalerPickle = open('models/scalerpickle_file', 'wb')
+    pickle.dump(scaler, scalerPickle)
 
     # Instantiate the model with 4 neighbors.
     knn = KNeighborsClassifier(n_neighbors=4)

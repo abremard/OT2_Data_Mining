@@ -15,6 +15,7 @@ X = dataframe[dataframe.columns.difference(
 # Load model
 loaded_knn = pickle.load(open('models/knnpickle_file', 'rb'))
 loaded_gb = pickle.load(open('models/gbpickle_file', 'rb'))
+loaded_scaler = pickle.load(open('models/scalerpickle_file', 'rb'))
 
 # Statistics
 stats = compute_statistics(dataframe)
@@ -27,7 +28,7 @@ for index, cluster in clusters.iterrows():
     print(dist)
 
 # KNN
-knn_result = loaded_knn.predict(X)
+knn_result = loaded_knn.predict(loaded_scaler.transform(X))
 print(knn_result)
 print(list(np.bincount(knn_result)))
 certainty = max(np.bincount(knn_result)) * 100 / sum(np.bincount(knn_result))
@@ -39,7 +40,7 @@ user = ['Alex', 'Stefan', 'Zihao', 'Zineb']
 ax.bar(user, list(np.bincount(knn_result)))
 plt.show()
 # GB
-gb_result = loaded_gb.predict(X)
+gb_result = loaded_gb.predict(loaded_scaler.transform(X))
 print(gb_result)
 print(list(np.bincount(gb_result)))
 certainty = max(np.bincount(gb_result)) * 100 / sum(np.bincount(gb_result))
@@ -50,3 +51,20 @@ ax = fig.add_axes([0,0,1,1])
 user = ['Alex', 'Stefan', 'Zihao', 'Zineb']
 ax.bar(user, list(np.bincount(gb_result)))
 plt.show()
+
+
+# TRAIN without scaler
+# 62.93279022403259
+# 82.4847250509165
+
+# TRAIN with scaler
+# 64.56211812627292
+# 83.09572301425662
+
+# TEST without scaler
+# 54.75578406169666
+# 90.48843187660668
+
+# TEST with scaler
+# 59.897172236503856
+# 90.48843187660668
