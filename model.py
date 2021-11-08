@@ -2,7 +2,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import GradientBoostingClassifier
-from datetime import datetime
 from sklearn.preprocessing import MinMaxScaler
 
 import pandas as pd
@@ -14,6 +13,7 @@ import json
 files = glob.glob("dataset/*.csv")
 rows = []
 dataframe = pd.DataFrame()
+
 
 def compute_statistics(dataset):
     average_hold_time = dataset["hold_time"].mean()
@@ -28,14 +28,15 @@ def compute_statistics(dataset):
     error_rate = len(
         dataset[dataset["key"] == "[backspace]"]) * 100 / len(dataset)
     ret = {
-            "average_hold_time": average_hold_time,
-            "average_press_press_time": average_press_press_time,
-            "average_press_release_time": average_press_release_time,
-            "average_release_release_time": average_release_release_time,
-            "apm": apm,
-            "error_rate": error_rate
-        }
+        "average_hold_time": average_hold_time,
+        "average_press_press_time": average_press_press_time,
+        "average_press_release_time": average_press_release_time,
+        "average_release_release_time": average_release_release_time,
+        "apm": apm,
+        "error_rate": error_rate
+    }
     return ret
+
 
 if __name__ == "__main__":
     print("------------------------- Statistics -------------------------")
