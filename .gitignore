@@ -1,8 +1,5 @@
 *.txt
 !requirements.txt
-press/*.txt
-release/*.txt
-dataset.csv
 models/**
 dataframe.csv
 press_df.csv
