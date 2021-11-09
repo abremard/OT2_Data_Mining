@@ -4,6 +4,10 @@
 
 Data-Processing:
 
+**gérer le fait qu'il y faut arrêter les scrips de saisie, attendre 30s... et que ce soit opaque à l'utilisateur**
+**the logs are under logs/username/eventtype**
+**the datasets are under datasets/**
+
 1. ✅ Remove uneccessary "press" logs when button is held (use hashmap)
 2. ✅ Map press events to release events (use stack)
 3. ✅ Format to : Keyname | Time-pressed | Time released | User (use pandas dataframe)
@@ -21,6 +25,12 @@ Other todo:
 - optimize more the KNN, by using grid search to find the optimal param https://towardsdatascience.com/building-a-k-nearest-neighbors-k-nn-model-with-scikit-learn-51209555453a
 - one hot encode every key
 - choisir le threshold pour les stats
+
+Visualizations:
+
+- cluster des knn pour les projections
+- barchart et polar chart pour les counts des prédictions -> KNN et gradient booster
+- visualization des stats (box plot, repartition) -> raw data
 
 ## Key logging
 
