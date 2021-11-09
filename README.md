@@ -4,8 +4,6 @@
 
 Data-Processing:
 
-**gérer le fait qu'il y faut arrêter les scrips de saisie, attendre 30s... et que ce soit opaque à l'utilisateur**
-
 1. ✅ Remove uneccessary "press" logs when button is held (use hashmap)
 2. ✅ Map press events to release events (use stack)
 3. ✅ Format to : Keyname | Time-pressed | Time released | User (use pandas dataframe)
