@@ -36,11 +36,11 @@ Visualizations:
 
 Run both scripts in 2 different terminals
 
-`python .\keylogger.py press`
+`python .\keylogger.py press [Your name]`
 
-`python .\keylogger.py release`
+`python .\keylogger.py release [Your name]`
 
-Or execute directly **start.bat** if you're using Windows
+Or execute directly `start.bat [Your name]` if you're using Windows
 
 ## Data preprocessing
 
