@@ -7,6 +7,7 @@ Data-Processing:
 **gérer le fait qu'il y faut arrêter les scrips de saisie, attendre 30s... et que ce soit opaque à l'utilisateur**
 **the logs are under logs/username/eventtype**
 **the datasets are under datasets/**
+**plot the statistic model (the one that uses euclidian distances)**
 
 1. ✅ Remove uneccessary "press" logs when button is held (use hashmap)
 2. ✅ Map press events to release events (use stack)
