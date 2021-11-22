@@ -9,10 +9,10 @@ from sklearn.neighbors import KNeighborsClassifier
 
 
 def preprocess(user=None):
-    press_files = glob.glob("press/*.txt")
+    press_files = glob.glob(f"logs/{user}/press/*.txt")
     press_rows = []
 
-    release_files = glob.glob("release/*.txt")
+    release_files = glob.glob(f"logs/{user}/release/*.txt")
     release_rows = []
 
     for press_file in press_files:
@@ -59,20 +59,22 @@ def preprocess(user=None):
         sub_df = release_df[release_df["key"] == row['key']]
         lower_bound = None
         for sub_id, sub_row in sub_df.reset_index().iterrows():
-            higher_bound = sub_row["timestamp"]
-            if sub_id == 0:
-                press_time = press_df[(press_df["key"] == sub_row["key"]) & (
-                    press_df["timestamp"] < higher_bound)].iloc[0]["timestamp"]
-            else:
-                press_time = press_df[(press_df["key"] == sub_row["key"]) & (
-                    press_df["timestamp"] < higher_bound) & (press_df["timestamp"] > lower_bound)].iloc[0]["timestamp"]
-            lower_bound = higher_bound
-            dataset_rows.append({
-                "key": sub_row["key"],
-                "pressed": press_time,
-                "released": sub_row["timestamp"],
-                "user": user
-            })
+            try:
+                higher_bound = sub_row["timestamp"]
+                if sub_id == 0:
+                    press_time = press_df[(press_df["key"] == sub_row["key"]) & (
+                        press_df["timestamp"] < higher_bound)].iloc[0]["timestamp"]
+                else:
+                    press_time = press_df[(press_df["key"] == sub_row["key"]) & (press_df["timestamp"] < higher_bound) & (press_df["timestamp"] > lower_bound)].iloc[0]["timestamp"]
+                lower_bound = higher_bound
+                dataset_rows.append({
+                    "key": sub_row["key"],
+                    "pressed": press_time,
+                    "released": sub_row["timestamp"],
+                    "user": user
+                })
+            except:
+                continue
 
     dataset = pd.DataFrame(dataset_rows).sort_values(['pressed'])
     dataset.to_csv("tmp_dataset.csv", date_format="%Y-%m-%d %H:%M:%S %f")
@@ -121,7 +123,7 @@ def preprocess(user=None):
     print("average_release_release_time", average_release_release_time)
     print("apm", apm)
 
-    dataset.to_csv("dataset.csv", index=False)
+    dataset[:-1].to_csv("dataset.csv", index=False)
 
     return dataset
 
