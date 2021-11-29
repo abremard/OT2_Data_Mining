@@ -1,48 +1,39 @@
-# OT2_Data_Mining
+# Data Mining and Analytics Project
 
-## TODO
+This project explores the topic of keyboard dynamics and their application in the identification of users using keystroke patterns. The project contains a keylogger for data acquisition, as well as multiple methods of data evaluation. Furthermore, multiple ML models are implemented for the purpose of identification of a user using typing patterns, as well as a practical example.
 
-Data-Processing:
+## Keylogger
 
-**gérer le fait qu'il y faut arrêter les scrips de saisie, attendre 30s... et que ce soit opaque à l'utilisateur**
-**the logs are under logs/username/eventtype**
-**the datasets are under datasets/**
-**plot the statistic model (the one that uses euclidian distances)**
+There are multiple ways to run the keylogger included in this project for the purposes of data acquisition.
 
-1. ✅ Remove uneccessary "press" logs when button is held (use hashmap)
-2. ✅ Map press events to release events (use stack)
-3. ✅ Format to : Keyname | Time-pressed | Time released | User (use pandas dataframe)
-4. Aggregate the format : Average hold time, press-press time, release-press time, APM (actions per minute)
-5. Add backspace counter compared to all key counter
+On a windows machine, please use the following command to launch the keylogger (instantly for press and release events):
 
-Algo:
+```bash
+./start.bat [Your Name]
+```
 
-1. EDA
-2. KNN
-3. Gradient booster (XGB / LGBM)
+Alternatively, use the following commands in separate terminals to launch the press and release event loggers separately:
 
-Other todo:
+```bash
+python .\keylogger.py press [Your name]
 
-- optimize more the KNN, by using grid search to find the optimal param https://towardsdatascience.com/building-a-k-nearest-neighbors-k-nn-model-with-scikit-learn-51209555453a
-- one hot encode every key
-- choisir le threshold pour les stats
+python .\keylogger.py release [Your name]
+```
 
-Visualizations:
+The files will be saved in the /logs/yourname folder. You can modify the parameters of recording keystrokes in the keylogger.py file by changing the following values:
 
-- cluster des knn pour les projections
-- barchart et polar chart pour les counts des prédictions -> KNN et gradient booster
-- visualization des stats (box plot, repartition) -> raw data
+```python
+#Time interval for saving a single log file
+SEND_REPORT_EVERY = 10 # in seconds, 60 means 1 minute and so on
+#Total time of keylogging
+INTERRUPT_AFTER = 300 # in seconds, 60 means 1 minute and so on
+```
 
-## Key logging
+## Usage
 
-Run both scripts in 2 different terminals
+The entirety of the code for the project (excluding the keylogger) can be found and executed on the Notebook contained in the project (main.ipynb)
 
-`python .\keylogger.py press [Your name]`
-
-`python .\keylogger.py release [Your name]`
-
-Or execute directly `start.bat [Your name]` if you're using Windows
-
-## Data preprocessing
-
-`python .\preprocess.py [Your name]`
+## Credits
+Project realized by Alexandre Bremard, Zineb Fadili, Zihao Hua, Stefan Ristovski
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
