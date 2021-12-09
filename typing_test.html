@@ -1,0 +1,101 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Typing Test</title>
+        <style>
+            .text {
+                border-style: solid;
+                width: 46%;
+            }
+            #text_to_tape {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <noscript>RIP JavaScript</noscript>
+        <div id="output"></div>
+        <h2 style="align-content: center">Let's type!</h2>
+        <div id="content">
+            <div id="left" class="text" style="float: left;">
+                <textarea id="textfield" cols="60" rows="20" oninput="compare()"></textarea>
+            </div>
+            <div id="right" class="text" style="float: right;">
+                <!-- <p id="text_to_tape" style="font-size: larger; line-height: 3em;">Hello</p> -->
+                <p id="text_to_tape" style="font-size: larger; line-height: 3em;">You wouldn't necessarily think milk, of all things, would be a persistent source of controversy and hot takes. And yet! To take one example, there was the tale of a family who says inflation means they're paying almost one dollar more per gallon-an increase that adds up, given that they're going through 12 gallons a week. That was enough to kick off a heavy round of social-media discourse earlier this month. Some couldn't believe one family drinks that much; others wondered when a gallon of milk was just $1.99, the price the family says it had been paying until recently. (Localized spikes in the price of milk have happened since the start of 2021, but the average national price of one gallon has been roughly the same, a little more than $3, for years.)
+
+                    Before that, New York Magazine's Grub Street trollishly proclaimed whole milk had made a "triumphant comeback"-among "hot girls," at least. For the rest of us, new milk alternatives seem to pop up every time you go to the store (Gawker on this trend? "No More Milk.") And it has lately been impossible to avoid ads for Oatly pitching a debatably-unhealthy oat beverage as "Like Milk but Made for Humans." You might reasonably wonder: Why does milk inspire such strong feelings? Why are there so many products that allow you to avoid it? And is it good for you or not? 
+                    
+                    The answer to the last question, at least to the federal government, is "yes." Citing research that milk is beneficial to bone health and cardiovascular functioning, current recommendations from the USDA call for three 8-ounce glasses of milk a day (or the equivalent portions of other dairy products, like cheese and yogurt). 
+                    
+                    From one angle, when you consider what's in milk, this makes sense. Much of it, about 90 percent, is just water. The rest is an amalgamation of fat, carbs, minerals, vitamins, and protein-including the branched-chain amino acids leucine, isoleucine, and valine, which play an essential part in building muscles and supporting healthy body composition. Milk is packed with calcium, vitamins B2 and B12, potassium, phosphorus, and added vitamin A and vitamin D. These are all key components of a healthy diet.</p>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    // document.onkeypress = autoScroll;
+
+    function sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    // function autoScroll() {
+    //     var cursor = document.getElementById("udl");
+
+    //     //滚动条高度+视窗高度 = 可见区域底部高度
+    //     var visibleBottom = window.scrollY + document.body.clientHeight;
+    //     //可见区域顶部高度
+    //     var visibleTop = window.scrollY;
+
+    //     var place = cursor.getBoundingClientRect();
+
+        
+        
+    //     var centerY = place.y + place.height; //+(box[i].offsetHeight/2);
+    //     console.log(centerY)
+    //     console.log(visibleTop)
+    //     console.log(visibleBottom)
+
+    //     if (centerY > visibleTop && centerY < visibleBottom) {
+    //         document.getElementById("output").innerHTML = "visible";
+    //     } else {
+    //         document.getElementById("output").innerHTML = "invisible";
+    //     }
+    
+
+
+    function compare() {
+
+        var goal = document.getElementById("text_to_tape").innerText;
+        var text = document.getElementById("textfield").value;
+
+        let j = text.length;
+        let i = 0;
+        let diff = [];
+
+        while(i < j && i < goal.length) {
+            if(goal.charAt(i) != text.charAt(i)) {
+                diff.push(i);
+            }
+            i++;
+        }
+
+        var new_text = goal;
+        if (goal.length > j) {
+            new_text = new_text.substring(0,j) 
+                     + '<span id="udl" style="text-decoration: underline">' + new_text.charAt(j) + '</span>' 
+                     //+ '<span style="text-decoration: underline">' + new_text.charAt(j+1) + '</span>' 
+                     + new_text.substring(j+1);
+        }
+        let l_diff = diff.length - 1;
+        while(l_diff >= 0) {
+            new_text = new_text.substring(0,diff[l_diff]) + '<span style="background-color: red">' + new_text.charAt(diff[l_diff]) + '</span>' + new_text.substring(diff[l_diff]+1);
+            l_diff--;
+        }
+        document.getElementById("text_to_tape").innerHTML = new_text;
+    }
+    
+</script>
